@@ -16,7 +16,7 @@ on:
 jobs:
   build:
 
-    runs-on: bilal2331/demo-app:tagname
+    runs-on: ubuntu-latest
     permissions:
       contents: read
 
