@@ -16,10 +16,7 @@ on:
 jobs:
   build:
 
-    runs-on: ${{matrix.os}}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
+    runs-on: bilal2331/demo-app:tagname
     permissions:
       contents: read
 
@@ -39,6 +36,13 @@ jobs:
     - name: Build with Gradle Wrapper
       run: ./gradlew build
 
+    - name: Build and push
+      uses: docker/build-push-action@v6
+      with:
+        push: true
+        tags: bilal2331/demo-app:demoCICD
+  
+
     # NOTE: The Gradle Wrapper is the default and recommended way to run Gradle (https://docs.gradle.org/current/userguide/gradle_wrapper.html).
     # If your project does not have the Gradle Wrapper configured, you can use the following configuration to run Gradle with a specified version.
     #
@@ -52,10 +56,7 @@ jobs:
 
   dependency-submission:
 
-    runs-on: ${{matrix.os}}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
+    runs-on: ubuntu-latest
     permissions:
       contents: write
 
