@@ -2,6 +2,9 @@ FROM openjdk:8-jre-alpine
 
 EXPOSE 8080
 
+RUN pwd
+
+
 RUN ls -la ./src
 RUN ls -la ./build
 RUN ls -la ./build/libs/
