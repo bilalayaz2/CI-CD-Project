@@ -36,8 +36,8 @@ jobs:
     - name: Build with Gradle Wrapper
       run: ./gradlew build
 
-    - name: List build output
-      run: ls -la build/libs/
+    # - name: List build output
+    #   run: ls -la build/libs/
 
     - name: Login to Docker Hub
       uses: docker/login-action@v3
@@ -45,11 +45,27 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    - name: List files in Docker build context
-      run: ls -la
+    # - name: List files in Docker build context
+    #   run: ls -la
 
-    - name: Build and push Docker image
-      run : docker build --no-cache -t bilal2331/demo-app:demoCICD .
+    # - name: Build and push Docker image
+    #   run : docker build --no-cache -t bilal2331/demo-app:demoCICD .
+
+    - name: check repository
+      uses: actions/checkout@v4
+
+    - name: login to docker registry
+      uses: docker/login-action@v3
+      with:
+        username: ${{secrets.DOCKERHUB_USERNAME}}
+        password: ${{secrets.DOCKERHUB_TOKEN}}
+
+    - name: build and push docker image to registry
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        push: true
+        tags: bilal2331/demo-app:latest
 
   
 
