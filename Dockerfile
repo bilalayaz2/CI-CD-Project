@@ -4,6 +4,7 @@ EXPOSE 8080
 
 
 WORKDIR /usr/app
+RUN ls -la /usr/app/
 
 RUN pwd
 
